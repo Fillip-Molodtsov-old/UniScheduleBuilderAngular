@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../../api-service/api-service";
+import {ToasterCustomService} from "../../service/toaster-custom.service";
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-subject-list',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubjectListComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['name', 'lecturer', 'practitioner', 'action']
+  dataSource: any[]
+
+  constructor(
+    private apiService: ApiService,
+    private toaster: ToasterCustomService,
+  ) {}
 
   ngOnInit(): void {
+    this.apiService.getAllSubjects().subscribe(res => {
+      this.dataSource = res;
+    })
   }
 
+  deleteSubject(id: number) {
+    this.apiService.deleteSubject(id)
+      .pipe(
+        switchMap(r => {
+          this.toaster.successfulNotification("Subject deleted successfully")
+          return this.apiService.getAllSubjects()
+        })
+      )
+      .subscribe(res => {
+        this.dataSource = res;
+    }, err => this.toaster.errorNotification(err));
+  }
 }

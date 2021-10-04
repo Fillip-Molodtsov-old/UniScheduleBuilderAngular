@@ -1,1 +1,46 @@
-<p>subject-list works!</p>
+<h1 class="text-center mt-3">Subjects</h1>
+
+<div class=" d-flex justify-content-center mb-5">
+  <button
+    [routerLink]="'/subject-editor'"
+    mat-raised-button
+    color="accent"
+    class="btn-w"
+  >
+    Create subject
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-auto">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="['/subject', element.id]">{{element.name}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lecturer">
+    <th mat-header-cell *matHeaderCellDef> Lecturer </th>
+    <td mat-cell *matCellDef="let element"> {{element.lecturer}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="practitioner">
+    <th mat-header-cell *matHeaderCellDef> Practitioner </th>
+    <td mat-cell *matCellDef="let element"> {{element.practitioner}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <div>
+        <a [routerLink]="['/subject-editor', element.id ]"><i class="fas fa-edit icon-fs me-3"></i></a>
+        <a (click)="deleteSubject(element.id)"><i class="fas fa-trash icon-fs"></i></a>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

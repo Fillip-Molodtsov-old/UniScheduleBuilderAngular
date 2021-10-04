@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {ToasterCustomService} from "../../service/toaster-custom.service";
 
 @Component({
   selector: 'app-subject-editor',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubjectEditorComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private apiService: ToasterCustomService,
+    private toaster: ToasterCustomService,
+  ) { }
 
   ngOnInit(): void {
   }
