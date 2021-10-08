@@ -1,1 +1,63 @@
-<p>subject-view works!</p>
+<div
+  class="container mt-5"
+  *ngIf="!isLoading"
+>
+  <h1 class="text-center">{{subjectInfo.name}}</h1>
+  <h3>Lectioner: {{subjectInfo.lecturer}}</h3>
+  <h3>Practitioner: {{subjectInfo.practitioner}}</h3>
+
+  <div class=" d-flex justify-content-center mb-5">
+    <button
+      [routerLink]="['/slot-editor', subjectId]"
+      mat-raised-button
+      color="accent"
+      class="btn-w"
+    >
+      Create slot
+    </button>
+  </div>
+
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-auto">
+
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef> day </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.day}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> time </th>
+      <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="weeks">
+      <th mat-header-cell *matHeaderCellDef> weeks </th>
+      <td mat-cell *matCellDef="let element"> {{element.weeks}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lection">
+      <th mat-header-cell *matHeaderCellDef> lection </th>
+      <td mat-cell *matCellDef="let element"> {{element.lection}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="room">
+      <th mat-header-cell *matHeaderCellDef> room </th>
+      <td mat-cell *matCellDef="let element"> {{element.room === '-1' ? 'Online' : element.room}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <div>
+          <a (click)="deleteSlot(element.id)"><i class="fas fa-trash icon-fs"></i></a>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

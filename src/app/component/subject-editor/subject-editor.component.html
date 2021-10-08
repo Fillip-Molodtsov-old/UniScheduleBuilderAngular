@@ -1,1 +1,39 @@
-<p>subject-editor works!</p>
+<div
+  *ngIf="!isLoading"
+  class="h-100per container d-flex justify-content-center align-items-center"
+>
+  <form
+    [formGroup]="form"
+    class="container m-form d-flex justify-content-center flex-column form-width mt-3 mb-3">
+    <h1 class="text-center">Subject ({{isEditing ? 'Editing' : 'Creation'}})</h1>
+    <mat-form-field
+      appearance="fill"
+      class="name-input mr-auto ml-auto mb-3">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="form.get('name')?.invalid">{{labelRequired}}</mat-error>
+    </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      class="name-input mr-auto ml-auto mb-3">
+      <mat-label>Lecturer</mat-label>
+      <input matInput formControlName="lecturer">
+      <mat-error *ngIf="form.get('lecturer')?.invalid">{{labelRequired}}</mat-error>
+    </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      class="name-input mr-auto ml-auto mb-3">
+      <mat-label>Practitioner</mat-label>
+      <input matInput formControlName="practitioner">
+      <mat-error *ngIf="form.get('practitioner')?.invalid">{{labelRequired}}</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button color="accent"
+      [disabled]="form.invalid"
+      class="name-input mr-auto ml-auto"
+      (click)="submit()"
+    >
+      {{isEditing ? 'Edit' : 'Create'}}
+    </button>
+  </form>
+</div>

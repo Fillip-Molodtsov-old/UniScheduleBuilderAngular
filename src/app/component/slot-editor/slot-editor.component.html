@@ -1,1 +1,61 @@
-<p>slot-editor works!</p>
+<div
+  *ngIf="!isLoading"
+  class="h-100per container d-flex justify-content-center align-items-center"
+>
+  <form
+    [formGroup]="form"
+    class="container m-form d-flex justify-content-center flex-column form-width mt-3 mb-3">
+    <h1 class="text-center">Slot creation</h1>
+    <mat-form-field
+      appearance="fill"
+      class="name-input mr-auto ml-auto mb-3"
+    >
+      <mat-label>Day</mat-label>
+      <mat-select formControlName="day">
+        <mat-option *ngFor="let day of days" [value]="day.id">
+          {{day.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      class="name-input mr-auto ml-auto mb-3"
+    >
+      <mat-label>Time</mat-label>
+      <mat-select formControlName="time">
+        <mat-option *ngFor="let time of times" [value]="time.id">
+          {{time.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle
+      formControlName="lection"
+      class="mb-3"
+    >
+      Is it a lection?
+    </mat-slide-toggle>
+    <mat-form-field
+      appearance="fill"
+      class="name-input mr-auto ml-auto mb-3">
+      <mat-label>Weeks</mat-label>
+      <input matInput formControlName="weeks">
+      <mat-error *ngIf="form.get('weeks')?.invalid">{{labelRequired}}</mat-error>
+    </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      class="name-input mr-auto ml-auto mb-3">
+      <mat-label>Room</mat-label>
+      <input matInput formControlName="room">
+      <mat-error *ngIf="form.get('room')?.invalid">{{labelRequired}}</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button color="accent"
+      [disabled]="form.invalid"
+      class="name-input mr-auto ml-auto"
+      (click)="submit()"
+    >
+      create
+    </button>
+  </form>
+</div>

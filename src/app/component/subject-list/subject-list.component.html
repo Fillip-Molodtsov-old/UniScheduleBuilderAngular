@@ -44,3 +44,14 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<div class=" d-flex justify-content-center mb-5">
+  <button
+    (click)="clearAll()"
+    mat-raised-button
+    color="warn"
+    class="btn-w mt-5"
+  >
+    Clear all
+  </button>
+</div>

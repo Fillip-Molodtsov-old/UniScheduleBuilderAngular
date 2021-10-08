@@ -8,6 +8,7 @@ import {AppGuard} from "./guard/app.guard";
 import { TimetableComponent } from "./component/timetable/timetable.component";
 import {SubjectViewComponent} from "./component/subject-view/subject-view.component";
 import {SubjectEditorComponent} from "./component/subject-editor/subject-editor.component";
+import {SlotEditorComponent} from "./component/slot-editor/slot-editor.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'subject-editor',
     component: SubjectEditorComponent,
+    canActivate: [AppGuard]
+  },
+  {
+    path: 'slot-editor/:subjectId',
+    component: SlotEditorComponent,
     canActivate: [AppGuard]
   },
   {

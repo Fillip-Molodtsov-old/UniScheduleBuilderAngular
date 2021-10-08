@@ -36,4 +36,13 @@ export class SubjectListComponent implements OnInit {
         this.dataSource = res;
     }, err => this.toaster.errorNotification(err));
   }
+
+  clearAll() {
+    this.apiService.clearApp().subscribe(_ => {
+      this.toaster.successfulNotification("Cleared app successfully");
+      this.ngOnInit()
+    }, err => {
+      this.toaster.errorNotification(err)
+    })
+  }
 }
